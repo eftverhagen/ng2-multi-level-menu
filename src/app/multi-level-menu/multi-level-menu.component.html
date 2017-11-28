@@ -10,7 +10,15 @@
   <div class="level">
       <ul [ngStyle]="{'transform': !_menu.state[1] ? 'translate3d(-300px, 0px, 0px)' : 'translate3d(0px, 0px, 0px)',
                       'width': _menu.w[1] + 'px'}">
-          <li>Computer</li>
+          <li (click)="_menu.toggle(2)">Devices</li>
+          <li>Laptop</li>
+          <li>Speakers</li>
+        </ul>
+  </div>
+  <div class="level">
+      <ul [ngStyle]="{'transform': !_menu.state[2] ? 'translate3d(-300px, 0px, 0px)' : 'translate3d(0px, 0px, 0px)',
+                      'width': _menu.w[2] + 'px'}">
+          <li (click)="_menu.toggle(3)">Devices</li>
           <li>Laptop</li>
           <li>Speakers</li>
         </ul>

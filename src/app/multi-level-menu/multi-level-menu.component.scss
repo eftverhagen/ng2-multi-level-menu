@@ -1,6 +1,6 @@
 .menu {
     ul {
-        position: absolute;
+        position: fixed;
         overflow: hidden;
         z-index: 999;
         top: 80px;
@@ -13,12 +13,14 @@
         margin: 0;
 
         li {
+            box-sizing: border-box;
             height: 50px;
             line-height: 50px;
             padding-left: 10px;
             width: 100%;
             background-color: #efefef;
-            margin-bottom: 1px;
+            margin: 1px;
+            border: 1px solid #999;
         }
 
         li:hover {
