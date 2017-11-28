@@ -8,7 +8,8 @@
         </ul>
   </div>
   <div class="level">
-      <ul [ngStyle]="{'transform': !_menu.state[1] ? 'translate3d(-300px, 0px, 0px)' : 'translate3d(0px, 0px, 0px)'}">
+      <ul [ngStyle]="{'transform': !_menu.state[1] ? 'translate3d(-300px, 0px, 0px)' : 'translate3d(0px, 0px, 0px)',
+                      'width': _menu.w[1] + 'px'}">
           <li>Computer</li>
           <li>Laptop</li>
           <li>Speakers</li>
