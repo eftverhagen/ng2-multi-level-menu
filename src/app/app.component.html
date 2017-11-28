@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="wrapper">
   <app-multi-level-menu></app-multi-level-menu>
-  <div class="container" [ngStyle]="{'left': true ? '300px': '0px'}">
+  <div class="container" [ngStyle]="{'transform': _menu.v ? 'translate3d(0px, 0px, 0px)' : 'translate3d(300px, 0px, 0px)'}">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero orci, euismod quis elit a, mattis condimentum leo. Sed id vehicula tellus. Curabitur consectetur dapibus quam, eu vestibulum orci gravida tristique. Morbi sodales dolor non nibh auctor, sit amet dictum mauris finibus. Nulla ut neque efficitur, placerat arcu vitae, aliquam diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam sed ligula eget augue commodo molestie.
     Ut sagittis felis quis massa faucibus commodo eget sed lorem. Nunc eu faucibus elit. Cras gravida dignissim orci, vel blandit neque mattis at. Vestibulum at tempus velit. Proin commodo lobortis lobortis. Duis semper, nibh ac hendrerit tincidunt, augue lacus viverra erat, nec laoreet tellus nisl et urna. Nulla vel lorem eget eros ullamcorper tempus.
     Praesent luctus leo ut auctor viverra. In eleifend consectetur neque, sit amet semper mauris iaculis sed. In elementum magna mauris, id aliquam leo placerat nec. Praesent sed volutpat erat. Ut sodales molestie ultrices. Nam vel imperdiet nisl. Nam tempor facilisis metus, vel laoreet ex hendrerit id. Ut posuere bibendum justo, in faucibus mauris aliquam eget.

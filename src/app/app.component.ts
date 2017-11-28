@@ -1,3 +1,4 @@
+import { MultiLevelMenuService } from './multi-level-menu.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  constructor(private _menu: MultiLevelMenuService) {
+    
+  }
   title = 'app';
 }
