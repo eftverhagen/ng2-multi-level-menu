@@ -1,3 +1,4 @@
+import { MultiLevelMenuService } from './../multi-level-menu.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MultiLevelMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _menu: MultiLevelMenuService) {
+    
+   }
 
   ngOnInit() {
+
   }
 
 }

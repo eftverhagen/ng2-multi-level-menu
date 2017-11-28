@@ -1,3 +1,4 @@
+import { MultiLevelMenuService } from './multi-level-menu.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -14,7 +15,7 @@ import { HeaderComponent } from './header/header.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [MultiLevelMenuService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
