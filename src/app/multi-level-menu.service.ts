@@ -22,11 +22,14 @@ export class MultiLevelMenuService {
   calculateLevelSize(){
     let levelsOpen = _.sumBy(this.state, i => i === true ? 1 : 0);
     let margin = levelsOpen;
-    this.w = _.map(this.state, (w, i) => {
-      let size = this.initialWidth + margin * 40;
-      margin -= 1;
-      return size;
-    });
+    if(levelsOpen > 1){
+      this.w = _.map(this.state, (w, i) => {
+        let size = this.initialWidth + margin * 40;
+        margin -= 1;
+        return size;
+      });
+    }
+    
     console.log('width', this.w);
     console.log('levels open:', levelsOpen);
   }
