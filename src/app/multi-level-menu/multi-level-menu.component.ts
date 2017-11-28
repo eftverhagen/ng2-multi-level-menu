@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MultiLevelMenuComponent implements OnInit {
 
-  constructor(private _menu: MultiLevelMenuService) {
-    
+  constructor(public _menu: MultiLevelMenuService) {
+
    }
 
   ngOnInit() {

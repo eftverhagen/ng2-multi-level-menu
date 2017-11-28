@@ -3,10 +3,10 @@ import * as _ from 'lodash';
 
 @Injectable()
 export class MultiLevelMenuService {
-  private state;
-  private initialWidth;
-  private w;
-  private contentLeft;
+  public state;
+  public initialWidth;
+  public w;
+  public contentLeft;
 
   constructor() { 
     this.state = [0, 0, 0];
