@@ -2,6 +2,7 @@
     ul {
         position: fixed;
         overflow: hidden;
+        box-sizing: border-box;
         z-index: 999;
         top: 80px;
         bottom: 0;
@@ -11,6 +12,7 @@
         transition: all 0.5s;
         padding: 0;
         margin: 0;
+        list-style: none;
 
         li {
             box-sizing: border-box;
@@ -19,7 +21,6 @@
             padding-left: 10px;
             width: 100%;
             background-color: #efefef;
-            margin: 1px;
             border: 1px solid #999;
         }
 
