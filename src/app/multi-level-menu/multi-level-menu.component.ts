@@ -14,8 +14,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       state('1',   style({
         transform: 'translate3d(0px, 0px, 0px)'
       })),
-      transition('void => 1', animate('100ms ease')),
-      transition('1 => 0', animate('100ms ease'))
+      transition('void => *', [
+        style({ transform: 'translate3d(-300px, 0px, 0px)'}),
+        animate("0.5s ease", style({ transform: 'translate3d(0px, 0px, 0px)' }))
+      ])
     ])
   ],
 })
