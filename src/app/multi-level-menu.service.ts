@@ -7,11 +7,13 @@ export class MultiLevelMenuService {
   public initialWidth;
   public w;
   public contentLeft;
+  public colors;
 
   constructor() { 
     this.state = [0, 0, 0];
     this.initialWidth = 300;
     this.w = [this.initialWidth];
+    this.colors = ['#02254a', '#023d4a', '#024a36'];
   }
 
   calculateContentLeft(){

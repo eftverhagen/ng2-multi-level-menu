@@ -1,26 +1,9 @@
 <nav class="menu">
-  <div class="level">
-      <ul [ngStyle]="{'transform': _menu.state[0] ? 'translate3d(0px, 0px, 0px)' : 'translate3d(-300px, 0px, 0px)',
-                      'width': _menu.w[0] + 'px'}">
-          <li (click)="_menu.toggle(1)">Devices</li>
+  <div class="level" *ngFor="let item of _menu.state; let i = index">
+      <ul [@anim]="item" [ngStyle]="{'width': _menu.w[i] + 'px', 'background-color': _menu.colors[i]}">
+          <li (click)="_menu.toggle(i + 1)">Devices</li>
           <li>Bikes</li>
           <li>Clothing</li>
-        </ul>
-  </div>
-  <div class="level">
-      <ul [ngStyle]="{'transform': _menu.state[1] ? 'translate3d(0px, 0px, 0px)' : 'translate3d(-300px, 0px, 0px)',
-                      'width': _menu.w[1] + 'px'}">
-          <li (click)="_menu.toggle(2)">Devices</li>
-          <li>Laptop</li>
-          <li>Speakers</li>
-        </ul>
-  </div>
-  <div class="level">
-      <ul [ngStyle]="{'transform': _menu.state[2] ? 'translate3d(0px, 0px, 0px)' : 'translate3d(-300px, 0px, 0px)',
-                      'width': _menu.w[2] + 'px'}">
-          <li>Devices</li>
-          <li>Laptop</li>
-          <li>Speakers</li>
         </ul>
   </div>
 </nav>

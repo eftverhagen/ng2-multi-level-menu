@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MultiLevelMenuService } from './multi-level-menu.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,8 @@ import { HeaderComponent } from './header/header.component';
     HeaderComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [MultiLevelMenuService],
   bootstrap: [AppComponent]
