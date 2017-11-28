@@ -9,9 +9,9 @@ export class MultiLevelMenuService {
   private contentLeft;
 
   constructor() { 
-    this.state = [0, 0];
+    this.state = [0, 0, 0];
     this.initialWidth = 300;
-    this.w = [300];
+    this.w = [this.initialWidth];
   }
 
   calculateContentLeft(){
@@ -21,15 +21,8 @@ export class MultiLevelMenuService {
 
   calculateLevelSize(){
     let levelsOpen = _.sumBy(this.state, i => i === true ? 1 : 0);
-    let margin = levelsOpen;
-    if(levelsOpen > 1){
-      this.w = _.map(this.state, (w, i) => {
-        let size = this.initialWidth + margin * 40;
-        margin -= 1;
-        return size;
-      });
-    }
-    
+    this.w = _.reverse(_.map(_.filter(this.state, l => l), (w, i) => this.initialWidth + i * 40));
+        
     console.log('width', this.w);
     console.log('levels open:', levelsOpen);
   }
