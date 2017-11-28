@@ -2,14 +2,18 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class MultiLevelMenuService {
-  private v;
+  private state;
 
   constructor() { 
-
+    this.state = [1, 0, 0];
   }
 
-  toggle(){
-    this.v = !this.v;
-    console.log(this.v)
+  toggle(level) {
+    let idx = level || 0;
+    this.state[idx] = !this.state[idx];
+  }
+
+  back(){
+
   }
 }

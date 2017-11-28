@@ -1,10 +1,29 @@
 .menu {
-    position: absolute;
-    overflow: hidden;
-    top: 80px;
-    bottom: 0;
-    left: 0;
-    width: 300px;
-    background-color: #999;
-    transition: all 0.5s;
+    ul {
+        position: absolute;
+        overflow: hidden;
+        top: 80px;
+        bottom: 0;
+        left: 0;
+        width: 300px;
+        background-color: #999;
+        transition: all 0.5s;
+        padding: 0;
+        margin: 0;
+
+        li {
+            height: 50px;
+            line-height: 50px;
+            padding-left: 10px;
+            width: 100%;
+            background-color: #efefef;
+            margin-bottom: 1px;
+        }
+
+        li:hover {
+            background-color: #ccc;
+        }
+    }
+    
 }
+
