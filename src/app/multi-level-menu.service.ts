@@ -20,25 +20,28 @@ export class MultiLevelMenuService {
   }
 
   calculateLevelSize(){
-    let levelsOpen = _.sumBy(this.state, i => i === true ? 1 : 0);
     this.w = _.reverse(_.map(_.filter(this.state, l => l), (w, i) => this.initialWidth + i * 40));
-        
     console.log('width', this.w);
-    console.log('levels open:', levelsOpen);
+  }
+
+  reset(){
+    this.w = _.map(this.state, l => this.initialWidth);
+    this.contentLeft = this.initialWidth;
   }
 
   toggle(level) {
     if(level){
       this.state[level] = !this.state[level];
+      this.calculateLevelSize();
+      this.calculateContentLeft();
     }else{
       this.state = _.map(this.state, (l, i) => {
-        return i === 0 ? !l : 0;
+        this.reset()
+        return i === 0 ? !l : false;
       });
 
     }
-  
-    this.calculateLevelSize();
-    this.calculateContentLeft();
+
     console.log(this.state);
     
   }
