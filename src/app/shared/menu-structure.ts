@@ -8,8 +8,12 @@ export const menuStructure = [
         {name: 'Prius', route: 'Prius'}
     ]}, // link
     {id: 2, items: [ // Level 3
-        {name: 'Jeans', route: 'Jeans'}, // Toggle level 2 (Toyota)
+        {name: 'Jeans', toggle: 3}, // Toggle level 2 (Toyota)
         {name: 'Sweater', route: 'Sweater'} // link
+    ]},
+    {id: 3, items: [ // Level 4
+        {name: 'Levis', route: 'Levis'}, // Toggle level 2 (Toyota)
+        {name: 'Wrangler', route: 'Wrangler'} // link
     ]}
 
 ];
