@@ -10,10 +10,10 @@ export class MultiLevelMenuService {
   public colors;
 
   constructor() { 
-    this.state = [0, 0, 0];
+    this.state = [false, false, false];
     this.initialWidth = 300;
     this.w = [this.initialWidth];
-    this.colors = ['#02254a', '#023d4a', '#024a36'];
+    this.colors = ['#2a4867', '#023d4a', '#024a36'];
   }
 
   calculateContentLeft(){
@@ -33,13 +33,13 @@ export class MultiLevelMenuService {
 
   toggle(level) {
     if(level){
-      this.state[level] = !this.state[level];
+      this.state[level] = 1 - this.state[level];
       this.calculateLevelSize();
       this.calculateContentLeft();
     }else{
       this.state = _.map(this.state, (l, i) => {
         this.reset()
-        return i === 0 ? !l : false;
+        return i === 0 ? 1 - l : 0;
       });
 
     }

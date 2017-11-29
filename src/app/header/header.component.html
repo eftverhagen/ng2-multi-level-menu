@@ -1,5 +1,5 @@
 <header class="header">
   <div (click)="_menu.toggle(false)" class="btn toggle">
-      <span>+</span>
+      <span>{{_menu.state[0] ? '-' : '+'}}</span>
   </div>
 </header>
