@@ -2,7 +2,10 @@
   <div class="level" *ngFor="let level of _menu.structure; let i = index;">
     <ul [ngClass]="_menu.state[i] ? 'active' : 'inactive'" [ngStyle]="{'width': _menu.w[i] + 'px', 
                                                              'background-color': _menu.colors[i]}">
-        <li *ngFor="let item of level" (click)="_menu.toggle(i + 1)">{{item.name}}</li>
+        <li *ngFor="let item of level; let x = index" (click)="!item.link && _menu.toggle(x + 1)">
+          <a *ngIf="item.link" href="item.link">{{item.name}}</a>
+          <span *ngIf="!item.link">{{item.name}}</span>
+        </li>
     </ul>
   </div>
 </nav>

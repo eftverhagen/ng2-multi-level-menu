@@ -1,10 +1,11 @@
-import { menuStructure } from './shared/menu-structure';
+import { menuStructure, menuStructure2 } from './shared/menu-structure';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
 @Injectable()
 export class MultiLevelMenuService {
   public state;
+  public state2;
   public initialWidth;
   public w;
   public contentLeft;
@@ -13,6 +14,12 @@ export class MultiLevelMenuService {
 
   constructor() { 
     this.state = [0, 0, 0];
+    this.state2 = _.map(menuStructure2, level => { 
+      return {name: level.name, active: false}; 
+    });
+
+    console.log(this.state2);
+
     this.initialWidth = 300;
     this.w = [this.initialWidth];
     this.colors = ['#2a4867', '#023d4a', '#024a36'];
