@@ -1,7 +1,6 @@
-export const menuStructure = {
-    items: [
-        {name: 'Cars', url: '/devices'},
-        {name: 'Cloting', url: '/devices'},
-        {name: 'Devices', url: '/devices'}
-    ]
-}
+export const menuStructure = [
+    [{name: 'Cars'},{name: 'Devices'}],
+    [{name: 'Audi'},{name: 'Toyota'}],
+    [{name: 'Laptop'},{name: 'Tablet'}]
+];
+

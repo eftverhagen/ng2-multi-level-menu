@@ -6,12 +6,13 @@
         z-index: 999;
         top: 80px;
         bottom: 0;
-        left: 0;
+        left: 0px;
         width: 300px;
         background-color: #999;
         padding: 0;
         margin: 0;
         list-style: none;
+        transform: translate3d(-300px,0px,0px);
         transition: all 0.5s;
 
         li {
@@ -27,6 +28,9 @@
         li:hover {
             background-color: rgba(0,0,0,0.2);
         }
+    }
+    ul.active {
+        transform: translate3d(0px,0px,0px);
     }
     
 }

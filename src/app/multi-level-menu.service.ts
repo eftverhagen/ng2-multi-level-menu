@@ -9,18 +9,15 @@ export class MultiLevelMenuService {
   public w;
   public contentLeft;
   public colors;
-  public menuActive: boolean = false;
+  public structure;
 
   constructor() { 
     this.state = [0, 0, 0];
     this.initialWidth = 300;
     this.w = [this.initialWidth];
     this.colors = ['#2a4867', '#023d4a', '#024a36'];
-  }
-
-  getLevelState(level) {
-    console.log(this.state[level] ? 'active' : 'inactive');
-    return this.state[level] ? 'active' : 'inactive'
+    
+    this.structure = menuStructure;
   }
 
   calculateContentLeft(){
