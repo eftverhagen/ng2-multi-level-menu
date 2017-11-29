@@ -1,4 +1,4 @@
-import { menuStructure, menuStructure2 } from './shared/menu-structure';
+import { menuStructure } from './shared/menu-structure';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
@@ -14,8 +14,8 @@ export class MultiLevelMenuService {
 
   constructor() { 
     this.state = [0, 0, 0];
-    this.state2 = _.map(menuStructure2, level => { 
-      return {name: level.name, active: false}; 
+    this.state2 = _.map(menuStructure, level => { 
+      return {id: level.id, name: level.name, active: 0}; 
     });
 
     console.log(this.state2);
@@ -32,7 +32,7 @@ export class MultiLevelMenuService {
   }
 
   calculateLevelSize(){
-    this.w = _.reverse(_.map(_.filter(this.state, l => l), (w, i) => this.initialWidth + i * 40));
+    this.w = _.reverse(_.map(_.filter(this.state2, level => level.active), (w, i) => this.initialWidth + i * 40));
   }
 
   reset(){
@@ -40,18 +40,24 @@ export class MultiLevelMenuService {
     this.contentLeft = this.initialWidth;
   }
 
-  toggle(level) {
-    console.log(this.state);
-    if(level) {
-      this.state[level] = 1 - this.state[level];
+  toggle(levelId) {
+    if(levelId) {
+      this.state2 = _.map(this.state2, (level) => {
+        if(level.id === levelId) {
+          level.active = 1 - level.active;
+        }
+        return level;
+      });
       this.calculateLevelSize();
       this.calculateContentLeft();
+      console.log(this.state2);
     }else{
-      this.state = _.map(this.state, (l, i) => {
-        this.reset()
-        return i === 0 ? 1 - l : 0;
+      this.state2 = _.map(this.state2, (level, i) => {
+        i === 0 ? level.active = 1 - level.active : level.active = 0;
+        return level;
       });
+      this.reset()
     }
-    console.log(this.state);   
+    console.log(this.state2);   
   }  
 }
