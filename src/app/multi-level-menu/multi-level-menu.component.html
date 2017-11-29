@@ -3,7 +3,8 @@
     <ul [ngClass]="_menu.state2[i].active ? 'active' : 'inactive'" [ngStyle]="{'width': _menu.w[i] + 'px', 
                                                              'background-color': _menu.colors[i]}">
         <li *ngFor="let item of level.items; let x = index" (click)="item.toggle && _menu.toggle(item.toggle)">
-          {{item.name}}
+            <ng-container *ngIf="item.route"><a href="#">{{item.name}}</a></ng-container>
+            <ng-container *ngIf="!item.route">{{item.name}}</ng-container>
         </li>
     </ul>
   </div>
