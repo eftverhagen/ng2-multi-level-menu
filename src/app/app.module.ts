@@ -6,6 +6,11 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { MultiLevelMenuComponent } from './multi-level-menu/multi-level-menu.component';
 import { HeaderComponent } from './header/header.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'aygo', redirectTo: '/' }
+];
 
 @NgModule({
   declarations: [
@@ -14,8 +19,12 @@ import { HeaderComponent } from './header/header.component';
     HeaderComponent
   ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [MultiLevelMenuService],
   bootstrap: [AppComponent]

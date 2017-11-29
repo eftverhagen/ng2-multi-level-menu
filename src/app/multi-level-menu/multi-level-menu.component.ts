@@ -1,6 +1,7 @@
 import { MultiLevelMenuService } from './../multi-level-menu.service';
 import { Component, OnInit, trigger, transition, animate, style, state } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-multi-level-menu',
