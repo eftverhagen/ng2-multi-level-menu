@@ -8,17 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   styleUrls: ['./multi-level-menu.component.scss'],
   animations: [
     trigger('anim', [
-      state('0', style({
-        transform: 'translate3d(-300px, 0px, 0px)'
-      })),
-      state('1',   style({
-        transform: 'translate3d(0px, 0px, 0px)'
-      })),
-      transition('0 => 1', [
-        animate("0.5s ease", style({
-          transform: 'translate3d(0px, 0px, 0px)'
-        }))
-      ])
+      state('inactive', style({transform: 'translate3d(-300px, 0px, 0px)'})),
+      state('active', style({transform: 'translate3d(0px, 0px, 0px)'})),
+      transition('inactive => active', animate("0.5s"))
     ])
   ],
 })

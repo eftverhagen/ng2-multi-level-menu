@@ -1,7 +1,8 @@
 <nav class="menu">
   <div class="level" *ngFor="let item of _menu.state; let i = index">
-      <ul [@anim]="item.toString()" [ngStyle]="{'width': _menu.w[i] + 'px', 'background-color': _menu.colors[i]}">
-          <li (click)="_menu.toggle(i + 1)">Devices {{item}}</li>
+      <ul [@anim]="_menu.menuState" [ngStyle]="{'width': _menu.w[i] + 'px', 
+                                                'background-color': _menu.colors[i]}">
+          <li (click)="_menu.toggle(i + 1)">Devices</li>
           <li>Bikes</li>
           <li>Clothing</li>
         </ul>
