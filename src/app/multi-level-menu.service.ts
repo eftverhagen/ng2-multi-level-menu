@@ -11,11 +11,13 @@ export class MultiLevelMenuService {
   public contentLeft;
   public colors;
   public structure;
+  private order;
 
   constructor() { 
     this.state = [0, 0, 0];
+    this.order = [0];
     this.state2 = _.map(menuStructure, level => { 
-      return {id: level.id, name: level.name, active: 0}; 
+      return {id: level.id, active: 0}; 
     });
 
     console.log(this.state2);
@@ -38,13 +40,27 @@ export class MultiLevelMenuService {
   reset(){
     this.w = _.map(this.state, l => this.initialWidth);
     this.contentLeft = this.initialWidth;
+    this.order = [0];
+  }
+
+  getTotalActive(){
+    console.log(_.sumBy(this.state2, l => l.active));
+    return _.sumBy(this.state2, l => l.active);
+  }
+  
+  getTopLevel(){
+    return _.max(_.map(_.filter(this.state2, level => level.active), level => level.id));
   }
 
   toggle(levelId) {
+
     if(levelId) {
       this.state2 = _.map(this.state2, (level) => {
         if(level.id === levelId) {
           level.active = 1 - level.active;
+          if(level.active === 1){
+            this.order.push(levelId)
+          }
         }
         return level;
       });
@@ -58,6 +74,6 @@ export class MultiLevelMenuService {
       });
       this.reset()
     }
-    console.log(this.state2);   
+    console.log(this.order);   
   }  
 }
