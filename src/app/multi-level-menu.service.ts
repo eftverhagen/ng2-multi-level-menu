@@ -47,11 +47,6 @@ export class MultiLevelMenuService {
     });
   }
 
-  reset(){
-    this.contentLeft = this.initialWidth;
-    this.order = [0];
-  }
-  
   toggle(levelId) {
     if(levelId !== 0) {
       this.state = _.map(this.state, (level) => {
@@ -73,11 +68,10 @@ export class MultiLevelMenuService {
         i === 0 ? level.active = 1 - level.active : level.active = 0;
         return level;
       });
-      
-      this.reset();
       this.calculateWidth();
       this.calculateContentLeft();
-      console.log(levelId);
+      this.contentLeft = this.initialWidth;
+      this.order = [0];
     }
     
     console.log('state', this.state, 'order', this.order);
@@ -88,7 +82,9 @@ export class MultiLevelMenuService {
     let r = 125;
     let g = 50;
     let b = 50;
-
+    let step = _.floor(_.difference([end], [start]) / numOfLevels);
+    let picks = [..._.range(start, end, step), end];
+    
     let seq = [
       {r: 0, b: 0, g: +1},
       {r: -1, b: 0, g: 0},
@@ -110,8 +106,7 @@ export class MultiLevelMenuService {
         }
       }
     });
-    let step = _.floor(_.difference([end], [start]) / numOfLevels);
-    let picks = [..._.range(start, end, step), end];
+
 
     if(random) {
       colors = _.map(picks, pick => colors[pick]);
