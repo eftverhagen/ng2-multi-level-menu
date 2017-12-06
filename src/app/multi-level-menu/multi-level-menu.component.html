@@ -1,9 +1,10 @@
 <nav class="menu">
-  <div class="level" *ngFor="let level of _menu.structure; let i = index;">
-    <ul [ngClass]="_menu.state2[i].active ? 'active' : 'inactive'" 
+  <div class="level" *ngFor="let level of _menu.state; let i = index;">
+    <ul [ngClass]="level.active ? 'active' : 'inactive'" 
         [ngStyle]="{
-          'width': _menu.w[i] + 'px', 
-          'background-color': _menu.colors[i]
+          'width': level.width + 'px', 
+          'background-color': _menu.colors[i],
+          'transform': level.active === 0 ? 'translate3d(-' + level.width+ 'px, 0px, 0px)' : ''
         }">
         <li *ngFor="let item of level.items; let x = index"
             

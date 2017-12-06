@@ -1,79 +1,77 @@
-import { menuStructure } from './shared/menu-structure';
+import { structure } from './shared/menu-structure';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
 @Injectable()
 export class MultiLevelMenuService {
   public state;
-  public state2;
-  public initialWidth;
-  public w;
   public contentLeft;
+  public initialWidth;
+  private offset;
   public colors;
-  public structure;
+
   private order;
 
   constructor() { 
-    this.state = [0, 0, 0];
-    this.order = [0];
-    this.state2 = _.map(menuStructure, level => { 
-      return {id: level.id, active: 0}; 
+    this.order = [];
+
+    this.initialWidth = 200;
+    this.offset = 40;
+    this.colors = ['#2a4867', '#023d4a', '#024a36'];
+    this.init();
+  }
+
+  init() {
+    this.state = _.map(structure, level => { 
+      level.active = 0;
+      level.width = this.initialWidth;
+      return level;
     });
 
-    console.log(this.state2);
-
-    this.initialWidth = 300;
-    this.w = [this.initialWidth];
-    this.colors = ['#2a4867', '#023d4a', '#024a36'];
-    
-    this.structure = menuStructure;
+    console.log(this.state);
   }
 
   calculateContentLeft(){
-    this.contentLeft = _.max(this.w);
+    this.contentLeft = _.max(_.map(this.state, level => level.width));
   }
 
-  calculateLevelSize(){
-    this.w = _.reverse(_.map(_.filter(this.state2, level => level.active), (w, i) => this.initialWidth + i * 40));
+  calculateWidth(){
+    this.state = _.map(this.state, (level, idx) => {
+      if(level.id === this.order[idx]) {
+        level.width = this.initialWidth + (this.offset * idx);
+      }
+      return level;
+    })
   }
 
   reset(){
-    this.w = _.map(this.state, l => this.initialWidth);
     this.contentLeft = this.initialWidth;
-    this.order = [0];
-  }
-
-  getTotalActive(){
-    console.log(_.sumBy(this.state2, l => l.active));
-    return _.sumBy(this.state2, l => l.active);
+    this.order = [];
   }
   
-  getTopLevel(){
-    return _.max(_.map(_.filter(this.state2, level => level.active), level => level.id));
-  }
-
   toggle(levelId) {
-
-    if(levelId) {
-      this.state2 = _.map(this.state2, (level) => {
+    if(levelId !== 0) {
+      this.state = _.map(this.state, (level) => {
         if(level.id === levelId) {
           level.active = 1 - level.active;
           if(level.active === 1){
-            this.order.push(levelId)
+            this.order.unshift(levelId)
           }
         }
         return level;
       });
-      this.calculateLevelSize();
+      this.calculateWidth();
       this.calculateContentLeft();
-      console.log(this.state2);
     }else{
-      this.state2 = _.map(this.state2, (level, i) => {
+      this.state = _.map(this.state, (level, i) => {
         i === 0 ? level.active = 1 - level.active : level.active = 0;
         return level;
       });
+      this.order.push(levelId)
       this.reset()
+      console.log(levelId);
     }
-    console.log(this.order);   
+    
+    console.log('state', this.state, 'order', this.order);
   }  
 }
