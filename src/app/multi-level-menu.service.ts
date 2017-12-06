@@ -9,7 +9,7 @@ export class MultiLevelMenuService {
   public initialWidth;
   private offset;
   public colors;
-
+  public colorsH;
   private order;
 
   constructor() { 
@@ -18,6 +18,7 @@ export class MultiLevelMenuService {
     this.initialWidth = 200;
     this.offset = 40;
     this.colors = ['#2a4867', '#023d4a', '#024a36'];
+    this.colorsH = _.range(0, 300, 20);
     this.init();
   }
 
@@ -36,17 +37,20 @@ export class MultiLevelMenuService {
   }
 
   calculateWidth(){
-    this.state = _.map(this.state, (level, idx) => {
-      if(level.id === this.order[idx]) {
-        level.width = this.initialWidth + (this.offset * idx);
-      }
-      return level;
-    })
+    let widths = _.reverse(_.map(this.order, i => i * this.offset + this.initialWidth));
+    _.map(this.order, (id, i) => {
+      this.state = _.map(this.state, (level,idx) => {
+        if(level.id === id) {
+          level.width = widths[i];
+        }
+        return level;
+      });
+    });
   }
 
   reset(){
     this.contentLeft = this.initialWidth;
-    this.order = [];
+    this.order = [0];
   }
   
   toggle(levelId) {
@@ -56,6 +60,9 @@ export class MultiLevelMenuService {
           level.active = 1 - level.active;
           if(level.active === 1){
             this.order.unshift(levelId)
+          }else{
+            let index = this.order.indexOf(levelId);
+            this.order.splice(index, 1);
           }
         }
         return level;
@@ -67,8 +74,10 @@ export class MultiLevelMenuService {
         i === 0 ? level.active = 1 - level.active : level.active = 0;
         return level;
       });
-      this.order.push(levelId)
-      this.reset()
+      
+      this.reset();
+      this.calculateWidth();
+      this.calculateContentLeft();
       console.log(levelId);
     }
     
