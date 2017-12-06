@@ -10,6 +10,7 @@ export class MultiLevelMenuService {
   private offset;
   public colors;
   public colorsH;
+  public rgb;
   private order;
 
   constructor() { 
@@ -17,22 +18,53 @@ export class MultiLevelMenuService {
 
     this.initialWidth = 200;
     this.offset = 40;
-    this.colors = ['#2a4867', '#023d4a', '#024a36'];
-    this.colorsH = _.range(0, 300, 20);
     this.init();
   }
 
   init() {
-    this.state = _.map(structure, level => { 
+    this.colors = this.generateColors(true, 0, 456, structure.length)
+    this.state = _.map(structure, (level, idx) => { 
       level.active = 0;
       level.width = this.initialWidth;
+      level.color = this.colors[idx];
       return level;
     });
-
-    console.log(this.state);
   }
 
-  calculateContentLeft(){
+  generateColors(random, start, end, numOfLevels) {
+    let colors = [];
+    let r = 125;
+    let g = 50;
+    let b = 50;
+
+    let seq = [
+      {r: 0, b: 0, g: +1},
+      {r: -1, b: 0, g: 0},
+      {r: 0, b: +1, g: 0},
+      {r: 0, b: 0, g: -1},
+      {r: +1, b: 0, g: 0},
+      {r: 0, b: -1, g: 0},
+    ];
+
+    _.map(seq, a => {
+      for(let i = 0; i <= 75; i++){
+        if(i ===0) {
+          colors.push({r,b,g});
+        }else{
+          r += a.r;
+          b += a.b;
+          g += a.g;
+          colors.push({r,g,b});
+        }
+      }
+    });
+    let step = _.difference([end], [start]) / numOfLevels;
+    let picks = _.range(start, end, step);
+    if(random) 
+      colors = _.map(picks, pick => colors[pick]);
+    return colors;
+  }
+  calculateContentLeft() {
     this.contentLeft = _.max(_.map(this.state, level => level.width));
   }
 
