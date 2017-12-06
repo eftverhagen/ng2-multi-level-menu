@@ -22,7 +22,7 @@ export class MultiLevelMenuService {
   }
 
   init() {
-    this.colors = this.generateColors(true, 0, 456, structure.length)
+    this.colors = this.generateColors(true, 0, 400, structure.length)
     this.state = _.map(structure, (level, idx) => { 
       level.active = 0;
       level.width = this.initialWidth;
@@ -31,39 +31,6 @@ export class MultiLevelMenuService {
     });
   }
 
-  generateColors(random, start, end, numOfLevels) {
-    let colors = [];
-    let r = 125;
-    let g = 50;
-    let b = 50;
-
-    let seq = [
-      {r: 0, b: 0, g: +1},
-      {r: -1, b: 0, g: 0},
-      {r: 0, b: +1, g: 0},
-      {r: 0, b: 0, g: -1},
-      {r: +1, b: 0, g: 0},
-      {r: 0, b: -1, g: 0},
-    ];
-
-    _.map(seq, a => {
-      for(let i = 0; i <= 75; i++){
-        if(i ===0) {
-          colors.push({r,b,g});
-        }else{
-          r += a.r;
-          b += a.b;
-          g += a.g;
-          colors.push({r,g,b});
-        }
-      }
-    });
-    let step = _.difference([end], [start]) / numOfLevels;
-    let picks = _.range(start, end, step);
-    if(random) 
-      colors = _.map(picks, pick => colors[pick]);
-    return colors;
-  }
   calculateContentLeft() {
     this.contentLeft = _.max(_.map(this.state, level => level.width));
   }
@@ -114,5 +81,41 @@ export class MultiLevelMenuService {
     }
     
     console.log('state', this.state, 'order', this.order);
-  }  
+  }
+
+  generateColors(random, start, end, numOfLevels) {
+    let colors = [];
+    let r = 125;
+    let g = 50;
+    let b = 50;
+
+    let seq = [
+      {r: 0, b: 0, g: +1},
+      {r: -1, b: 0, g: 0},
+      {r: 0, b: +1, g: 0},
+      {r: 0, b: 0, g: -1},
+      {r: +1, b: 0, g: 0},
+      {r: 0, b: -1, g: 0},
+    ];
+
+    _.map(seq, a => {
+      for(let i = 0; i <= 75; i++){
+        if(i ===0) {
+          colors.push({r,b,g});
+        }else{
+          r += a.r;
+          b += a.b;
+          g += a.g;
+          colors.push({r,g,b});
+        }
+      }
+    });
+    let step = _.floor(_.difference([end], [start]) / numOfLevels);
+    let picks = [..._.range(start, end, step), end];
+
+    if(random) {
+      colors = _.map(picks, pick => colors[pick]);
+    }
+    return colors;
+  }
 }
