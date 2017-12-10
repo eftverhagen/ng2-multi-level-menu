@@ -96,6 +96,14 @@ export class MultiLevelMenuService {
   }
 
   closeUntil(levelId) {
+    let stop = false;
+    this.order = _.filter(this.order, id => {
+      if(id === levelId){
+        stop = true;
+      }
+      return stop;
+    });
+    
     this.state = _.map(this.state, level => {
       if(level.id === levelId) {
         level.active = 1;
@@ -107,13 +115,7 @@ export class MultiLevelMenuService {
       }
       return level;
     });
-    let stop = false;
-    this.order = _.filter(this.order, id => {
-      if(id === levelId){
-        stop = true;
-      }
-      return stop;
-    });
+
     this.calculateWidth('close');
     this.calculateContentLeft();
     console.log(this.order);
