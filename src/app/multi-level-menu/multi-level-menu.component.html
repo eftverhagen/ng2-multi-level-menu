@@ -13,7 +13,9 @@
         <li *ngFor="let item of level.items; let x = index"
             
             (click)="item.toggle && _menu.openLevel($event, item.toggle)"
-            [routerLink]="item.route">
+            [routerLink]="item.route"
+            [ngStyle]="{'opacity': _menu.isOverlapped(level.id) ? '0' : '1',
+                        'visibility': _menu.isOverlapped(level.id) ? 'hidden' : 'visible'}">
             {{item.name}} 
         </li>
     </ul>

@@ -21,6 +21,7 @@
             width: 100%;
             background-color: rgba(0,0,0,0.1);
             color: #efefef;
+            transition: visibility 0s, opacity 0.3s ease-in-out;
             
             a {
                 display: block;
