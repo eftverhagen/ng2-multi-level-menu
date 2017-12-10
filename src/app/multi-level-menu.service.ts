@@ -86,19 +86,6 @@ export class MultiLevelMenuService {
   }
 
   closeUntil(levelId) {
-    this.state = _.map(this.state, (level) => {
-      if(level.id === levelId || 
-        this.order.indexOf(level.id) >
-        this.order.indexOf(levelId)) {
-        level.active = 1;
-        this.order
-      }else{
-        level.active = 0;
-        let index = this.order.indexOf(level.id);
-        this.order.splice(index, 1);
-      }
-      return level;
-    });
     this.calculateWidth();
     this.calculateContentLeft();
   }

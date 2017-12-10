@@ -5,8 +5,17 @@
 
 .container {
     position: relative;
-    background-color: rgb(155, 228, 133);
-    height: 100%;
     transition: all 0.5s;
+    background-color: green;
     padding: 10px;
+}
+
+.overlay {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
 }
