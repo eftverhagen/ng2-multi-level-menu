@@ -35,16 +35,27 @@ export class MultiLevelMenuService {
     this.contentLeft = _.max(_.map(this.state, level => level.width));
   }
 
-  calculateWidth(){
-    let widths = _.map(this.order, (i, index) => this.initialWidth + (index * this.offset));
-    this.state = _.map(this.state, level => {
-      _.map(this.order, levelId => {
-        if(level.id === levelId) {
-          level.width = widths[this.order.indexOf(levelId)];
-        }
-      });
-      return level;
-    });
+  calculateWidth(to = 'open'){
+    switch(to) {
+      case 'open': {
+        let widths = _.map(this.order, (i, index) => this.initialWidth + (index * this.offset));
+        this.state = _.map(this.state, level => {
+          _.map(this.order, levelId => {
+            if(level.id === levelId) {
+              level.width = widths[this.order.indexOf(levelId)];
+            }
+          });
+          return level;
+        });
+      }
+      case 'close': {
+        this.state = _.map(this.state, level => {
+          level.width -= this.offset;
+          return level;
+        })
+      }
+    }
+    
   }
 
   isOverlapped(levelId) {
@@ -65,7 +76,7 @@ export class MultiLevelMenuService {
         }
         return level;
       });
-
+      console.log(this.order);
       this.calculateWidth();
       this.calculateContentLeft();
   }
@@ -79,7 +90,7 @@ export class MultiLevelMenuService {
       }
       return level;
     });
-    this.calculateWidth();
+    this.calculateWidth('open');
     this.calculateContentLeft();
     console.log(this.order);
   }
@@ -89,13 +100,21 @@ export class MultiLevelMenuService {
       if(level.id === levelId) {
         level.active = 1;
       }else if(this.order.indexOf(level.id) > this.order.indexOf(levelId)){
+        console.log('overlaps: ', this.order.indexOf(level.id) > this.order.indexOf(levelId))
         level.active = 1;
       }else{
         level.active = 0;
       }
       return level;
-    })
-    this.calculateWidth();
+    });
+    let stop = false;
+    this.order = _.filter(this.order, id => {
+      if(id === levelId){
+        stop = true;
+      }
+      return stop;
+    });
+    this.calculateWidth('close');
     this.calculateContentLeft();
     console.log(this.order);
   }
