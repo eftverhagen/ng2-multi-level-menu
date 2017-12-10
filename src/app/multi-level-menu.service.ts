@@ -46,6 +46,24 @@ export class MultiLevelMenuService {
       });
     });
   }
+  isOverlapped(levelId) {
+    let index = this.order.indexOf(levelId);
+    return typeof this.order[index -1] !== 'undefined';
+  }
+  closeUntil(levelId) {
+    this.state = _.map(this.state, (level) => {
+      if(level.id === levelId) {
+        level.active = 1 - level.active;
+        if(level.active === 1){
+          this.order.unshift(levelId)
+        }else{
+          let index = this.order.indexOf(levelId);
+          this.order.splice(index, 1);
+        }
+      }
+      return level;
+    });
+  }
 
   toggle(levelId) {
     if(levelId !== 0) {

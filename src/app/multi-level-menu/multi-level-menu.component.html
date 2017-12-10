@@ -1,11 +1,13 @@
 <nav class="menu">
   <div class="level" *ngFor="let level of _menu.state; let i = index;">
+      
     <ul [ngClass]="level.active ? 'active' : 'inactive'" 
         [ngStyle]="{
           'width': level.width + 'px', 
           'background-color': 'rgba(' + level.color.r + ',' + level.color.g + ',' +  level.color.b + ', 1)',
           'transform': level.active === 0 ? 'translate3d(-' + level.width+ 'px, 0px, 0px)' : ''
         }">
+        <span style="position: fixed; right: 0; top: 0;">{{ _menu.isOverlapped(level.id) }}</span>
         <li *ngFor="let item of level.items; let x = index"
             
             (click)="item.toggle && _menu.toggle(item.toggle)"
