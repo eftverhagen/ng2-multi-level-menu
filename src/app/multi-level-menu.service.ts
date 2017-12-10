@@ -7,7 +7,7 @@ export class MultiLevelMenuService {
   public state;
   public contentLeft;
   public initialWidth;
-  private offset;
+  public offset;
   public colors;
   public colorsH;
   public rgb;
@@ -103,7 +103,7 @@ export class MultiLevelMenuService {
       }
       return stop;
     });
-    
+
     this.state = _.map(this.state, level => {
       if(level.id === levelId) {
         level.active = 1;

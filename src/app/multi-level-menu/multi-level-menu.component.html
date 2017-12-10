@@ -15,7 +15,7 @@
             (click)="item.toggle && _menu.openLevel($event, item.toggle)"
             [routerLink]="item.route"
             [ngStyle]="{'opacity': _menu.isOverlapped(level.id) ? '0' : '1',
-                        'visibility': _menu.isOverlapped(level.id) ? 'hidden' : 'visible'}">
+                        'transform': _menu.isOverlapped(level.id) ? 'translate3d(-' + _menu.offset + 'px, 0px, 0px)' : 'translate3d(0px, 0px, 0px)'}">
             {{item.name}} 
         </li>
     </ul>
