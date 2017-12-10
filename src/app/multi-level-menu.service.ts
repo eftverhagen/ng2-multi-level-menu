@@ -52,56 +52,62 @@ export class MultiLevelMenuService {
     return typeof this.order[index -1] !== 'undefined';
   }
 
-  closeUntil(levelId) {
-    console.log('hi');
-    // this.state = _.map(this.state, (level) => {
-    //   if(level.id !== levelId) {
-    //     level.active = 1 - level.active;
-    //     if(level.active === 1){
-    //       this.order.unshift(levelId)
-    //     }else{
-    //       let index = this.order.indexOf(levelId);
-    //       this.order.splice(index, 1);
-    //     }
-    //   }
-    //   return level;
-    // });
+  toggleMenu($event) {
+    $event.stopPropagation();
+      this.state = _.map(this.state, level => {
+        if(level.id === 0) {
+          level.active = 1 - level.active;
+          if(level.active === 1) {
+            this.order = [0];
+          }
+        }else{
+          level.active = 0;
+        }
+        return level;
+      });
+
+      this.calculateWidth();
+      this.calculateContentLeft();
   }
 
-  toggle($event, levelId) {
+  openLevel($event, levelId) {
     $event.stopPropagation();
-    if(this.order.length === 0) {
-        this.state = _.map(this.state, (level, i) => {
-          i === 0 ? level.active = 1 - level.active : level.active = 0;
-          return level;
-        });
-        this.calculateWidth();
-        this.calculateContentLeft();
-        this.contentLeft = this.initialWidth;
-        this.order = [0];
-    }else{
-        this.state = _.map(this.state, (level) => {
-          if(level.id === levelId) {
-            level.active = 1 - level.active;
-            if(level.active === 1){
-              this.order.unshift(levelId)
-            }else{
-              let index = this.order.indexOf(levelId);
-              this.order.splice(index, 1);
-            }
-          }
-          return level;
-        });
-        this.calculateWidth();
-        this.calculateContentLeft();
-    }
-    
-    console.log('state', this.state, 
-                'widths', _.map(this.state, level => {
-                  return {id: level.id, width: level.width};
-                }),
-                'order', this.order);
+    this.state = _.map(this.state, level => {
+      if(level.id === levelId &&
+         this.order.indexOf(level.id) === -1) {
+        level.active = 1;
+        this.order.unshift(levelId);
+      }
+      return level;
+    });
+    this.calculateWidth();
+    this.calculateContentLeft();
+    console.log(this.order);
   }
+
+  closeUntil(levelId) {
+    this.state = _.map(this.state, (level) => {
+      if(level.id === levelId || 
+        this.order.indexOf(level.id) >
+        this.order.indexOf(levelId)) {
+        level.active = 1;
+        this.order
+      }else{
+        level.active = 0;
+        let index = this.order.indexOf(level.id);
+        this.order.splice(index, 1);
+      }
+      return level;
+    });
+    this.calculateWidth();
+    this.calculateContentLeft();
+  }
+
+
+
+
+
+  
 
   generateColors(random, start, end, numOfLevels) {
     let colors = [];
