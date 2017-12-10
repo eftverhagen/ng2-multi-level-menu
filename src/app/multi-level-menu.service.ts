@@ -36,20 +36,22 @@ export class MultiLevelMenuService {
   }
 
   calculateWidth(){
-    let widths = _.reverse(_.map(this.order, i => i * this.offset + this.initialWidth));
-    _.map(this.order, (id, i) => {
-      this.state = _.map(this.state, (level,idx) => {
-        if(level.id === id) {
-          level.width = widths[i];
+    let widths = _.map(this.order, (i, index) => this.initialWidth + (index * this.offset));
+    this.state = _.map(this.state, level => {
+      _.map(this.order, levelId => {
+        if(level.id === levelId) {
+          level.width = widths[this.order.indexOf(levelId)];
         }
-        return level;
       });
+      return level;
     });
   }
+
   isOverlapped(levelId) {
     let index = this.order.indexOf(levelId);
     return typeof this.order[index -1] !== 'undefined';
   }
+
   closeUntil(levelId) {
     this.state = _.map(this.state, (level) => {
       if(level.id === levelId) {
@@ -92,7 +94,11 @@ export class MultiLevelMenuService {
       this.order = [0];
     }
     
-    console.log('state', this.state, 'order', this.order);
+    console.log('state', this.state, 
+                'widths', _.map(this.state, level => {
+                  return {id: level.id, width: level.width};
+                }),
+                'order', this.order);
   }
 
   generateColors(random, start, end, numOfLevels) {
