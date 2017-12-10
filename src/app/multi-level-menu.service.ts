@@ -73,8 +73,7 @@ export class MultiLevelMenuService {
   openLevel($event, levelId) {
     $event.stopPropagation();
     this.state = _.map(this.state, level => {
-      if(level.id === levelId &&
-         this.order.indexOf(level.id) === -1) {
+      if(level.id === levelId && this.order.indexOf(level.id) === -1) {
         level.active = 1;
         this.order.unshift(levelId);
       }
@@ -86,8 +85,19 @@ export class MultiLevelMenuService {
   }
 
   closeUntil(levelId) {
+    this.state = _.map(this.state, level => {
+      if(level.id === levelId) {
+        level.active = 1;
+      }else if(this.order.indexOf(level.id) > this.order.indexOf(levelId)){
+        level.active = 1;
+      }else{
+        level.active = 0;
+      }
+      return level;
+    })
     this.calculateWidth();
     this.calculateContentLeft();
+    console.log(this.order);
   }
 
 
